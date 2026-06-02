@@ -9,7 +9,8 @@ public class PassengerVIPValidation extends PassengerValidation{
     super(luggageWeights);
   }
 
-    public void validateLuggage() {
+  @Override
+  public void validateLuggage() {
     try {
       if (getLuggageWeights().size() > 3){
         throw new ExcessBaggageCountException("Number of suitcases allowed has been exceeded");
@@ -19,6 +20,7 @@ public class PassengerVIPValidation extends PassengerValidation{
     }
   }
 
+  @Override
   public double validateLuggageWeights() {
     double penalty = 0;
 
