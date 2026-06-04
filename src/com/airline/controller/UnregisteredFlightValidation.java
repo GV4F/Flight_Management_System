@@ -13,7 +13,7 @@ public class UnregisteredFlightValidation {
           throw new DuplicateFlightException("This flight is already registered");
         }
       }
-    } catch (Exception e) {
+    } catch (DuplicateFlightException e) {
       System.out.printf("The flight %s: %s", flight.getID(), e);
     }
   }

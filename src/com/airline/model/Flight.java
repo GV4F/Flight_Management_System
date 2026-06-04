@@ -33,6 +33,9 @@ public class Flight {
 
   public void addANewPassenger(Passenger passenger) {
     FullFlightValidation.flightValidation(this.seatings, registeredPassenger);
+    UnregisteredPassengerValidation.unregisteredPassenger(registeredPassenger, passenger);
+
+    registeredPassenger.add(passenger);
   }
 
   public void viewNumberOfOccupiedSeats(){
