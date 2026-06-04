@@ -17,4 +17,13 @@ public class Airline {
     UnregisteredFlightValidation.unregisteredFlight(allFlights, flight);
     allFlights.add(flight);
   }
+
+  public Flight getFlight(String idFlight){
+    for(Flight flight: allFlights) {
+      if(flight.getID() == idFlight) {
+        return flight;
+      }
+    }
+    return null;
+  }
 }
