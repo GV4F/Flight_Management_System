@@ -38,4 +38,30 @@ public class Flight {
   public void viewNumberOfOccupiedSeats(){
     System.out.printf("Total seats: %d%n Occupied Seats: %d", this.seatings, registeredPassenger.size());
   }
+
+  public void viewPassengerRegistered() {
+
+    if(registeredPassenger.isEmpty()) {
+      System.out.println("There are no occupied seats");
+      return;
+    }
+    System.out.println("=================== REGISTERED PASSENGERS REPORT ===================");
+
+    for (Passenger passenger: registeredPassenger) {
+
+      System.out.printf("ID: %s%nName: %s%n", passenger.getID(), passenger.getName());
+      System.out.println("Ristered Luggage: ");
+
+      if(passenger.getLuggageWeights().isEmpty()){
+        System.out.println("This passenger hasn't checked baggage");
+      } else {
+        List<Double> luggages = passenger.getLuggageWeights();
+
+        for (int i = 0; i < luggages.size(); i++) {
+          System.out.printf("%d Luggage: %.2f", (i+1), luggages.get(i));
+        }
+      }
+      System.out.println("=========================================================");
+    }
+  }
 }
