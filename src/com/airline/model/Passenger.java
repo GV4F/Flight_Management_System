@@ -1,4 +1,6 @@
+package com.airline.model;
 import java.util.List;
+import com.airline.controller.*;
 
 public class Passenger {
   private String id; 
@@ -11,16 +13,6 @@ public class Passenger {
     this.luggageWeights = luggageWeights;
   }
   
-  public void validateLuggage() {
-    if (this.luggageWeights.size() > 1) {
-      System.out.println("Baggage allowance exceeded");
-    }
-    if (this.luggageWeights.get(0) > 8) {
-      System.out.println("Luggage exceeds the permitted weight");
-      System.out.println("A $.40.00 fine will be applied for excess weight");
-    }
-  }
-
   public String getID() {
     return this.id;
   }
@@ -33,4 +25,12 @@ public class Passenger {
     return luggageWeights;
   }
   
+  public void addNewPassenger() {
+
+    var validation = new PassengerValidation(this.luggageWeights);
+    validation.validateLuggage();
+    double penalty = validation.validateLuggageWeights();
+
+    System.out.printf("%.2f", penalty);
+  }
 }

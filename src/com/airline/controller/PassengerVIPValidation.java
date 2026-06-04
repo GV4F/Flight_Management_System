@@ -1,7 +1,7 @@
 package com.airline.controller;
-import java.util.List;
-import com.airline.exceptions.ExcessBaggageCountException;
 
+import java.util.List;
+import com.airline.exceptions.*;
 
 public class PassengerVIPValidation extends PassengerValidation{
 
@@ -13,9 +13,9 @@ public class PassengerVIPValidation extends PassengerValidation{
   public void validateLuggage() {
     try {
       if (getLuggageWeights().size() > 3){
-        throw new ExcessBaggageCountException("Number of suitcases allowed has been exceeded");
+        throw new ExcessLuggageWeightException("Number of suitcases allowed has been exceeded");
       }
-    } catch (ExcessBaggageCountException e) {
+    } catch (ExcessLuggageWeightException e) {
       System.out.printf("%s.%nNumber of suitcases allowed: 1, Your suitcases: %d", e.getMessage(), getLuggageWeights().size());
     }
   }

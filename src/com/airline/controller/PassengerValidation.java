@@ -10,16 +10,18 @@ public class PassengerValidation {
     this.luggageWeights = luggageWeights;
   }
 
+  // : With this method we can validate the number of suitcases
   public void validateLuggage() {
     try {
       if (this.luggageWeights.size() > 1){
-        throw new ExcessBaggageCountException("Number of suitcases allowed has been exceeded");
+        throw new ExcessLuggageWeightException("Number of suitcases allowed has been exceeded");
       }
-    } catch (ExcessBaggageCountException e) {
+    } catch (ExcessLuggageWeightException e) {
       System.out.printf("%s.%nNumber of suitcases allowed: 1, Your suitcases: %d", e.getMessage(), this.luggageWeights.size());
     }
   }
 
+  // : With this method we can validate the weight of suitcases
   public double validateLuggageWeights() {
     double penalty = 0;
     if (this.luggageWeights.get(0) > 8) {

@@ -1,3 +1,4 @@
+package com.airline.model;
 import java.util.List;
 public class PassengerVIP extends Passenger {
   
@@ -5,7 +6,6 @@ public class PassengerVIP extends Passenger {
     super(id, name, luggageWeights);
   }
 
-  @Override
   public void validateLuggage() {
     if (getLuggageWeights().size() > 3) {
       System.out.println("Baggage allowance exceeded");
