@@ -25,12 +25,13 @@ public class Passenger {
     return luggageWeights;
   }
   
-  public void addNewPassenger() {
+  public double calculateTotal() {
 
+    final double price = 100.00;
     var validation = new PassengerValidation(this.luggageWeights);
     validation.validateLuggage();
-    double penalty = validation.validateLuggageWeights();
+    double penalty = validation.validateLuggageWeights() + price;
 
-    System.out.printf("%.2f", penalty);
+    return penalty;
   }
 }
