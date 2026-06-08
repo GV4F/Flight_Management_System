@@ -10,13 +10,10 @@ public class PassengerVIPValidation extends PassengerValidation{
   }
 
   @Override
-  public void validateLuggage() {
-    try {
-      if (getLuggageWeights().size() > 3){
-        throw new ExcessLuggageWeightException("Number of suitcases allowed has been exceeded");
-      }
-    } catch (ExcessLuggageWeightException e) {
-      System.out.printf("%s.%nNumber of suitcases allowed: 1, Your suitcases: %d", e.getMessage(), getLuggageWeights().size());
+  public void validateLuggage() throws ExcessLuggageWeightException {
+    if (getLuggageWeights().size() > 3){
+      String message = "Number of suitcases allowed has been exceeded: " + getLuggageWeights().size() + "/3";
+      throw new ExcessLuggageWeightException(message);
     }
   }
 

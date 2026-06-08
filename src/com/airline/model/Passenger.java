@@ -29,7 +29,6 @@ public class Passenger {
 
     final double price = 100.00;
     var validation = new PassengerValidation(this.luggageWeights);
-    validation.validateLuggage();
     double penalty = validation.validateLuggageWeights() + price;
 
     return penalty;

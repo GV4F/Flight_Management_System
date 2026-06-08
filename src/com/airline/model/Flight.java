@@ -1,11 +1,13 @@
 package com.airline.model;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import com.airline.controller.*;
+import com.airline.exceptions.*;
 
 public class Flight {
   private Integer seatings;
-  private List<Passenger> registeredPassenger;
+  private List<Passenger> registeredPassenger = new ArrayList<>();
   private String id = generateID();
 
   public Flight(Integer seatings) {
@@ -31,21 +33,32 @@ public class Flight {
     return this.id;
   }
 
-  public void addANewPassenger(Passenger passenger) {
-    FullFlightValidation.flightValidation(this.seatings, registeredPassenger);
-    UnregisteredPassengerValidation.unregisteredPassenger(registeredPassenger, passenger);
+  public List<Passenger> getRegisteredPassenger() {
+    return registeredPassenger;
+  }
 
-    registeredPassenger.add(passenger);
+  public void addANewPassenger(Passenger passenger) {
+    try {
+      var validation = new PassengerValidation(passenger.getLuggageWeights());
+      FullFlightValidation.flightValidation(this.seatings, getRegisteredPassenger());
+      UnregisteredPassengerValidation.unregisteredPassenger(getRegisteredPassenger(), passenger);
+      validation.validateLuggage();
+  
+      registeredPassenger.add(passenger);
+    } catch(FullFlightException | DuplicatePassengerException | ExcessLuggageWeightException e) {
+      System.out.printf("%n%s%n", e.getMessage());
+    }
+
   }
 
   public void viewNumberOfOccupiedSeats(){
-    System.out.printf("Total seats: %d%n Occupied Seats: %d", this.seatings, registeredPassenger.size());
+    System.out.printf("%nTotal seats: %d%nOccupied Seats: %d%n", this.seatings, registeredPassenger.size());
   }
 
   public void viewPassengerRegistered() {
 
     if(registeredPassenger.isEmpty()) {
-      System.out.println("There are no occupied seats");
+      System.out.println("\nThere are no occupied seats\n");
       return;
     }
     System.out.println("=================== REGISTERED PASSENGERS REPORT ===================");
@@ -64,7 +77,7 @@ public class Flight {
           System.out.printf("%d Luggage: %.2f", (i+1), luggages.get(i));
         }
       }
-      System.out.println("=========================================================");
+      System.out.println("\n=========================================================\n");
     }
   }
 }
